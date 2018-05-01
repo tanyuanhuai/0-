@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!-- 控制台输出的，也就是打印在catlina.out文件上-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoding>UTF-8</encoding>
         <encoder>
@@ -10,6 +12,7 @@
         </filter>
     </appender>
 
+    <!-- 项目日志，存放在文件里，根据日期自动滚动-->
     <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/mmall.log</File>-->
         <File>/developer/apache-tomcat-7.0.73/logs/mmall.log</File>
@@ -24,6 +27,7 @@
     </appender>
 
 
+    <!-- error的日志时，自动输出到一个文件-->
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/mmalllog/error.log</File>-->
         <File>/developer/apache-tomcat-7.0.73/logs/error.log</File>
@@ -43,6 +47,7 @@
         </filter>
     </appender>
 
+    <!-- 这个配置是 info级别的，additivity不向上继承，依赖两个appender-->
     <logger name="com.mmall" additivity="false" level="INFO" >
         <appender-ref ref="mmall" />
         <appender-ref ref="console"/>
@@ -50,8 +55,7 @@
 
 
 
-    <!-- geelynote mybatis log 日志 -->
-
+    <!-- dao层的日志 mybatis log 日志 ，例如sql语句-->
     <logger name="com.mmall.dao" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
@@ -69,7 +73,7 @@
         <!--<appender-ref ref="console"/>-->
     <!--</logger>-->
 
-
+    <!-- 根节点日志输出-->
     <root level="DEBUG">
         <appender-ref ref="console"/>
         <appender-ref ref="error"/>
